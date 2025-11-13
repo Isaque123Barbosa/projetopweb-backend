@@ -1,26 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDonationDto } from './dto/create-donation.dto';
 import { UpdateDonationDto } from './dto/update-donation.dto';
+import { Repository } from 'typeorm';
+import { Donation } from './entities/donation.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class DonationsService {
-  create(createDonationDto: CreateDonationDto) {
-    return 'This action adds a new donation';
+
+  constructor(
+    @InjectRepository(Donation)
+    private readonly repository: Repository<Donation>
+  ){
+
+  }
+
+  create(dto: CreateDonationDto) {
+    const donation = this.repository.create(dto);
+    return this.repository.save(donation);
   }
 
   findAll() {
-    return `This action returns all donations`;
+    return this.repository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} donation`;
+  findOne(id: string) {
+    return this.repository.findOneBy({id});
   }
 
-  update(id: number, updateDonationDto: UpdateDonationDto) {
-    return `This action updates a #${id} donation`;
+  async update(id: string, dto: UpdateDonationDto) {
+    const donation = await this.repository.findOneBy({id});
+    if(!donation) return null;
+    this.repository.merge(donation, dto);
+    return this.repository.save(donation);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} donation`;
+  async remove(id: string) {
+    const donation = await this.repository.findOneBy({id});
+    if(!donation) return null;
+    return this.repository.remove(donation);
+  }
+
+  async removeByName(donatorName: string) {
+    const donation = await this.repository.findOneBy({donatorName});
+    if(!donation) return null;
+    return this.repository.remove(donation);
   }
 }
