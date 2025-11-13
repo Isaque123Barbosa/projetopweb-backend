@@ -46,4 +46,17 @@ export class DonationsService {
     if(!donation) return null;
     return this.repository.remove(donation);
   }
+
+  async removeAll() {
+  // Use o método delete, mas passe uma condição vazia ou 'true'
+  // Dependendo da sua ORM (TypeORM), você pode precisar de uma sintaxe específica.
+  // Uma das formas mais comuns é:
+
+  const result = await this.repository.delete({});
+  
+  // Alternativamente, para garantir a exclusão em massa:
+  // const result = await this.repository.clear(); // Limpa a tabela completamente (recomeça a contagem de ID)
+  
+  return result;
+}
 }
