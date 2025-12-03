@@ -1,0 +1,11 @@
+POST http://localhost:3000/institutions/
+Content-Type: application/json
+
+{
+    "institutionName": "Test"
+}
+
+###SDHAUKDGAKDH
+GET http://localhost:3000/institutions
+
+###

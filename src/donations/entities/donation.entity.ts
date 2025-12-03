@@ -1,4 +1,5 @@
-import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Institution } from "../../institutions/entities/institutions.entity";
 
 const { nanoid } = require('nanoid');
 
@@ -24,6 +25,15 @@ export class Donation {
 
     @Column()
     donatorCep: string;
+
+    @Column()
+    institutionId: string;
+
+
+    @ManyToOne(() => Institution, institution => institution.donations)
+
+    @JoinColumn({ name: 'institutionId' }) 
+    institution: Institution;
 
     @BeforeInsert()
     generateId(){

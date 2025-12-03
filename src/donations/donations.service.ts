@@ -4,13 +4,14 @@ import { UpdateDonationDto } from './dto/update-donation.dto';
 import { Repository } from 'typeorm';
 import { Donation } from './entities/donation.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { InstitutionsService } from 'src/institutions/institutions.service';
 
 @Injectable()
 export class DonationsService {
 
   constructor(
     @InjectRepository(Donation)
-    private readonly repository: Repository<Donation>
+    private readonly repository: Repository<Donation>,
   ){
 
   }
@@ -58,5 +59,5 @@ export class DonationsService {
   // const result = await this.repository.clear(); // Limpa a tabela completamente (recomeça a contagem de ID)
   
   return result;
-}
+  }
 }

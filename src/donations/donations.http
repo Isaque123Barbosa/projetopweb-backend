@@ -2,12 +2,13 @@ POST http://localhost:3000/donations/
 Content-Type: application/json
 
 {
-    "donatorName": "Teste-2",
+    "donatorName": "Teste-10",
     "amount": 450,
     "date": "2025-10-04",
     "donatorCpf": "123.456.789-10",
     "donatorPhone": "99999-9999",
-    "donatorCep": "12345-678"
+    "donatorCep": "12345-678",
+    "institutionId": "inst_Z2fM0jjABhIuaEQ7wkGHK"
 }
 
 ###SDHAUKDGAKDH
