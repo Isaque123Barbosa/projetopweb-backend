@@ -37,6 +37,6 @@ export class Donation {
 
     @BeforeInsert()
     generateId(){
-        this.id = `dev_${nanoid()}`
+        this.id = `don_${nanoid()}`
     }
 }
